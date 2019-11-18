@@ -16,10 +16,7 @@ namespace MPAG_OrderAndTrip
         public List<Carrier> GetRelevantCarriers(Order pendingOrder)
         {
             // Instatiate Data access layer 
-            // Call method pass(pendingOrder.orgin)j
-            foreach()
-
-            pendingOrder.origin
+            // Call method pass(pendingOrder.orgin)
         }
     }
 }
