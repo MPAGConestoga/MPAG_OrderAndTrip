@@ -11,7 +11,7 @@ namespace MPAG_OrderAndTrip
     class TMSDAL
     {
         private string buyerConnectionString = "server=127.0.0.1;user id=buyer;database=tms;password=conestoga;SslMode=none";
-        //g
+        //gg
         public void InsertOrder(Order order)
         {
             using (var myConn = new MySqlConnection(buyerConnectionString))
