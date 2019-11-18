@@ -66,15 +66,27 @@ namespace MPAG_OrderAndTrip
             return isValid;
         }
 
-        public Order()
+        public Order(bool jobType, uint quantity, string origin, string destination, bool vanType)
         {
             Random rng = new Random();          // DEBUG: This is a placeholder for the orderId that will
             orderID = rng.Next(10000, 99000);   // be grabbed from the database baased on the Id of the last order
+
+            if (jobType && quantity == 0)
+            {
+                throw new Exception("A LTL Job needs to have at least one pallet");
+            }
+
+            this.jobType = jobType;
+            this.quantity = quantity;
+            this.vanType = vanType;
+            this.origin = origin;
+            this.destination = destination;
+            dateCreated = DateTime.Now;
         }
       
         public Order CreateOrder(bool jobType, uint quantity, string origin, string destination, bool vanType)
         {
-            Order newOrder = new Order();
+            Order newOrder = new Order( jobType, quantity, origin, destination, vanType);
             return newOrder;
         }
 
