@@ -14,6 +14,8 @@ namespace MPAG_OrderAndTrip
         private double FTLRate;
         private double LTLRate;
         private double ReeferCharge;
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
         // Temporary Constructor: the Carrier should only be created by the Admin Class -> Implement interface AdminRoles:CreateCarrier
         public Carrier(string name, int initialAvaFTL, int initialAvaLTL, double rateFTL, double rateLTL, double charge, List<string> initialDepots)
@@ -32,6 +34,10 @@ namespace MPAG_OrderAndTrip
             DepotCities = initialDepots;   // The admin will list the availible cities for that carrier
         }
 
+        public Carrier()
+        {
+        }
+
         public void ChangeFTLRate(Carrier someCarrier, double newFTLRate)
         {
             if(newFTLRate > 0.00)
@@ -46,6 +52,12 @@ namespace MPAG_OrderAndTrip
             {
                 someCarrier.LTLRate = newLTLRate;
             }
+        }
+
+        public List<Carrier> getCarriersWithDepot()
+        {
+            var carriers = new TMSDAL().GetCarriers(this);
+            return carriers;
         }
     }
 }

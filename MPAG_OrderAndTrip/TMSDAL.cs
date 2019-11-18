@@ -100,14 +100,22 @@ namespace MPAG_OrderAndTrip
         {
             //Comparison should be done by the person name. 
             int retValue = -1;
-            const string sqlStatement = @"SELECT
-                                         Count(*)
-                                         FROM Person
-                                         WHERE Person_Id = @Person_Id;";
+            const string sqlStatement = @"SELECT COUNT(*) 
+	                                    FROM person AS p
+                                        INNER JOIN customer as c
+                                        WHERE c.Customer_Id = (SELECT temporaryTable.Person_ID FROM
+					                    (Select Person_Id FROM person
+					                    WHERE First_Name = @FirstName
+                                        AND Last_Name = @LastName
+                                        AND Phone = @Phone) 
+                                        AS temporaryTable);";
             using (var myConn = new MySqlConnection(buyerConnectionString))
             {
                 var myCommand = new MySqlCommand(sqlStatement, myConn);
-                myCommand.Parameters.AddWithValue("@Person_Id", person.personID);
+                myCommand.Parameters.AddWithValue("@FirstName", person.firstName);
+                myCommand.Parameters.AddWithValue("@LastName", person.lastName);
+                myCommand.Parameters.AddWithValue("@Phone", person.phoneNum);
+
                 var myAdapter = new MySqlDataAdapter
                 {
                     SelectCommand = myCommand
@@ -125,9 +133,42 @@ namespace MPAG_OrderAndTrip
             return retValue;
         }
 
-        public List<Carrier> GetCategories()
+        public List<Carrier> GetCarriers(Carrier carrier)
         {
-            const string sqlStatement = @""
+            const string sqlStatement = @"SELECT 
+	                                    c.Carrier_Id,
+	                                    c.Carrier_Name,
+                                        c.Phone,
+                                        c.Email,
+                                        c.LTL_Rate,
+                                        c.FTL_Rate
+                                        FROM carrier AS c
+                                        INNER JOIN depot AS d 
+	                                    WHERE d.Carrier_Id = (SELECT temporaryTable.Carrier_ID FROM
+					                                    (Select Carrier_Id FROM carrier
+					                                    WHERE Carrier_Name = @CarrierName) 
+                                                        AS temporaryTable);";
+
+            using (var myConn = new MySqlConnection(buyerConnectionString))
+            {
+
+                var myCommand = new MySqlCommand(sqlStatement, myConn);
+                myCommand.Parameters.AddWithValue("@CarrierName", carrier.carrierName);
+
+                //For offline connection we will use  MySqlDataAdapter class.  
+                var myAdapter = new MySqlDataAdapter
+                {
+                    SelectCommand = myCommand
+                };
+
+                var dataTable = new DataTable();
+
+                myAdapter.Fill(dataTable);
+
+                var carriers = DataTableToCarrierList(dataTable);
+
+                return carriers;
+            }
         }
 
         public List<Order> GetOrdersForPlanner()
@@ -181,6 +222,24 @@ namespace MPAG_OrderAndTrip
                 }); ;
             }
             return orders;
+        }
+
+        private List<Carrier> DataTableToCarrierList(DataTable table)
+        {
+            var carriers = new List<Carrier>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                carriers.Add(new Carrier
+                {
+                    carrierId = Convert.ToInt32(row["Carrier_Id"]),
+                    carrierName = row["Carrier_Name"].ToString(),
+                    Phone = row["Phone"].ToString(),
+                    Email = row["Email"].ToString(),
+
+                }); ;
+            }
+            return carriers;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MPAG_OrderAndTrip
     {
         static void Main(string[] args)
         {
-            Order newOrder = null;
+            /*Order newOrder = null;
 
             Buyer buyer1 = new Buyer("Mark", "Ruffalo", "test@gmail.com", "SomeAddress", "9003930");
             try
@@ -22,8 +22,23 @@ namespace MPAG_OrderAndTrip
             {
                 Console.WriteLine(e.Message);               //---------------DEBUG---------------------//
             }
+            newOrder.AddOrder();
+            newOrder.confirmOrder();
 
-           
+            Console.WriteLine(newOrder.origin);
+            Console.WriteLine(newOrder.destination);
+            Console.WriteLine(newOrder.jobType);
+            Console.WriteLine(newOrder.vanType);*/
+
+            Person bob = new Person("John", "Wick", "@gmail.com", "gogoaddress", "123");
+            int i = new TMSDAL().SearchForCustomer(bob);
+            Console.WriteLine(i);
+
+            //Carrier test = new Carrier();
+            //test.carrierName = "Carrier 1";
+            //var list = test.getCarriersWithDepot();
+            Console.WriteLine("");
+            
 
         }
     }

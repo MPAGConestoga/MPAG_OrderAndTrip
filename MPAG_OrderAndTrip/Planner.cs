@@ -13,13 +13,13 @@ namespace MPAG_OrderAndTrip
         { }
 
         //---------------Methods-----------------------//
-        public List<Carrier> GetRelevantCarriers(Order pendingOrder)
-        {
-            // Instatiate Data access layer 
-            // Call method pass(pendingOrder.orgin)j
-            foreach()
+        //public List<Carrier> GetRelevantCarriers(Order pendingOrder)
+        //{
+        //    // Instatiate Data access layer 
+        //    // Call method pass(pendingOrder.orgin)j
+        //    foreach()
 
-            pendingOrder.origin
-        }
+        //    pendingOrder.origin
+        //}
     }
 }
