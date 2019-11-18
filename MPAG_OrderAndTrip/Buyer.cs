@@ -21,22 +21,8 @@ namespace MPAG_OrderAndTrip
         // Create Order 
         public Order CreateOrder(bool jobType, uint quantity, string origin, string destination, bool vanType)
         {
-            if (jobType && quantity == 0)
-            {
-                throw new Exception("A LTL Job needs to have at least one pallet");
-            }
-
-            Order newOrder = new Order();
-
-            newOrder.jobType = jobType;
-            newOrder.quantity = quantity;
-            newOrder.vanType = vanType;
-            newOrder.origin = origin;
-            newOrder.destination = destination;
-            newOrder.dateCompleted = DateTime.Now;
-
-            // Attribute the Order to the buyer
-            CreatedOrders.Add(newOrder);
+            Order newOrder = new Order(jobType, quantity, origin, destination, vanType);
+            CreatedOrders.Add(newOrder);      // Attribute the Order to the buyer
             return newOrder;
         }
     }
