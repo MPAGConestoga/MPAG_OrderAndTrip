@@ -77,5 +77,15 @@ namespace MPAG_OrderAndTrip
             Order newOrder = new Order();
             return newOrder;
         }
+
+        public void AddOrder()
+        {
+            new TMSDAL().InsertOrder(this);
+        }
+
+        public void confirmOrder()
+        {
+            new TMSDAL().confirmOrder(this);
+        }
     }
 }
