@@ -6,15 +6,16 @@ namespace MPAG_OrderAndTrip
     public class Person
     {
         //--------- Attributes ---------//
-        private int personID;           // Key
-        private string firstName;
-        private string lastName;
-        private string phoneNum;
-        private string email;
-        private string address;
+        public int personID { get; set; }           // Key
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string phoneNum { get; set; }
+        public string email { get; set; }
+        private string address{get; set;}
 
         public Person(string firstName, string lastName, string email, string address, string phoneNum)
         {
+            this.personID = 1;
             this.firstName = firstName;
             this.lastName = lastName;
             this.address = address;
