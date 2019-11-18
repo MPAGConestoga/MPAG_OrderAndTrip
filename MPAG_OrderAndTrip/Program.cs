@@ -23,10 +23,8 @@ namespace MPAG_OrderAndTrip
                 Console.WriteLine(e.Message);               //---------------DEBUG---------------------//
             }
 
-            Console.WriteLine(newOrder.origin);
-            Console.WriteLine(newOrder.destination);
-            Console.WriteLine(newOrder.jobType);
-            Console.WriteLine(newOrder.vanType);
+           
+
         }
     }
 }

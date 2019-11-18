@@ -9,7 +9,7 @@ namespace MPAG_OrderAndTrip
     public class Order : IOrderCreation
     {
         //--------- Attributes ---------//
-        public readonly int orderID;
+        public int orderID { get; set; }
 
         private string _origin;
         private string _destination;
@@ -49,6 +49,7 @@ namespace MPAG_OrderAndTrip
         public DateTime dateCreated { get; set; }
         public DateTime dateCompleted { get; set; }
 
+        //--------- Methods ---------//
         private static bool ValidateCity(string newCity)
         {
             bool isValid = false;
@@ -67,8 +68,8 @@ namespace MPAG_OrderAndTrip
 
         public Order()
         {
-            Random rng = new Random();
-            orderID = rng.Next(10000, 99000);
+            Random rng = new Random();          // DEBUG: This is a placeholder for the orderId that will
+            orderID = rng.Next(10000, 99000);   // be grabbed from the database baased on the Id of the last order
         }
       
         public Order CreateOrder(bool jobType, uint quantity, string origin, string destination, bool vanType)
