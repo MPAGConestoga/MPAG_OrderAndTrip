@@ -112,14 +112,20 @@ namespace MPAG_OrderAndTrip
             }
         }
 
-        public int SearchForCustomer(Person person)
+        public void SearchForCustomer(Person person)
         {
             //Comparison should be done by the person name. 
-            int retValue = -1;
-            const string sqlStatement = @"SELECT COUNT(*) 
+            const string sqlStatement = @"SELECT 
+                                        p.Person_Id, p.First_Name, p.Last_Name, p.Phone, p.Email, a.Street_Address, city.City, prov.Province, a.Postal_Code
 	                                    FROM person AS p
                                         INNER JOIN customer as c
-                                        WHERE c.Customer_Id = (SELECT temporaryTable.Person_ID FROM
+                                        INNER JOIN address as a
+                                        INNER JOIN city
+                                        INNER JOIN province as prov
+                                        WHERE a.Address_Id = c.Address_Id
+                                        AND a.Province_Id = prov.Province_Id
+                                        AND a.City_Id = city.City_Id
+                                        AND c.Customer_Id = (SELECT temporaryTable.Person_ID FROM
 					                    (Select Person_Id FROM person
 					                    WHERE First_Name = @FirstName
                                         AND Last_Name = @LastName
@@ -142,11 +148,15 @@ namespace MPAG_OrderAndTrip
                 myAdapter.Fill(table);
                 foreach (DataRow row in table.Rows)
                 {
-
-                    retValue = Convert.ToInt32(row["Count(*)"]);
+                    person.personID = Convert.ToInt32(row["Person_Id"]);
+                    person.firstName = row["First_Name"].ToString();
+                    person.lastName = row["Last_Name"].ToString();
+                    person.phoneNum = row["Phone"].ToString();
+                    person.email = row["Email"].ToString();
+                    person.address = ((row["Street_Address"].ToString()) + (row["City"].ToString()) + (row["Province"].ToString()) + (row["Postal_Code"].ToString()));
                 }
             }
-            return retValue;
+
         }
 
         public List<Carrier> GetCarrierByName(Carrier carrier)
