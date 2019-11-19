@@ -26,7 +26,23 @@ namespace MPAG_OrderAndTrip
                 myCommand.Parameters.AddWithValue("@Destination", order.destination);
                 myCommand.Parameters.AddWithValue("@Job_Type", order.jobType);
                 myCommand.Parameters.AddWithValue("@Van_Type", order.vanType);
-                //myCommand.Parameters.AddWithValue("@Customer_Id", 1);
+
+                myConn.Open();
+
+                myCommand.ExecuteNonQuery();
+            }
+        }
+
+        public void addAddress(string address, string city, string province, string postal)
+        {
+            using (var myConn = new MySqlConnection(buyerConnectionString))
+            {
+                const string sqlStatement = @"  INSERT INTO City(City)
+                                                            (@city); ";
+
+                var myCommand = new MySqlCommand(sqlStatement, myConn);
+
+                myCommand.Parameters.AddWithValue("@city", city);
 
                 myConn.Open();
 
@@ -133,7 +149,7 @@ namespace MPAG_OrderAndTrip
             return retValue;
         }
 
-        public List<Carrier> GetCarriers(Carrier carrier)
+        public List<Carrier> GetCarrierByName(Carrier carrier)
         {
             const string sqlStatement = @"SELECT 
 	                                    c.Carrier_Id,
@@ -169,6 +185,47 @@ namespace MPAG_OrderAndTrip
 
                 return carriers;
             }
+        }
+
+        public List<Carrier> GetCarriersByCity(string city)
+        {
+            const string sqlStatement = @"SELECT
+                                            c.Carrier_Id,
+	                                        c.Carrier_Name,
+                                            c.Phone,
+                                            c.Email,
+                                            c.LTL_Rate,
+                                            c.FTL_Rate
+                                            FROM carrier AS c
+                                            INNER JOIN depot AS d
+                                            INNER JOIN city
+                                            WHERE c.Carrier_Id = 
+                                                       (SELECT d.Carrier_Id
+                                                        WHERE d.Delivery_City_Id =
+                                                                (SELECT city.City_Id
+                                                                WHERE city.City = @City));";
+
+            using (var myConn = new MySqlConnection(buyerConnectionString))
+            {
+
+                var myCommand = new MySqlCommand(sqlStatement, myConn);
+                myCommand.Parameters.AddWithValue("@City", city);
+
+                //For offline connection we will use  MySqlDataAdapter class.  
+                var myAdapter = new MySqlDataAdapter
+                {
+                    SelectCommand = myCommand
+                };
+
+                var dataTable = new DataTable();
+
+                myAdapter.Fill(dataTable);
+
+                var carriers = DataTableToCarrierList(dataTable);
+
+                return carriers;
+            }
+            
         }
 
         public List<Order> GetOrdersForPlanner()

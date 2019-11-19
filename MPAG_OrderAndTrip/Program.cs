@@ -30,13 +30,13 @@ namespace MPAG_OrderAndTrip
             Console.WriteLine(newOrder.jobType);
             Console.WriteLine(newOrder.vanType);*/
 
-            Person bob = new Person("John", "Wick", "@gmail.com", "gogoaddress", "123");
-            int i = new TMSDAL().SearchForCustomer(bob);
-            Console.WriteLine(i);
+            //Person bob = new Person("John", "Wick", "@gmail.com", "gogoaddress", "123");
+            //int i = new TMSDAL().SearchForCustomer(bob);
+            //Console.WriteLine(i);
 
             //Carrier test = new Carrier();
             //test.carrierName = "Carrier 1";
-            //var list = test.getCarriersWithDepot();
+            var list = new TMSDAL().GetCarriersByCity("Guelph");
             Console.WriteLine("");
             
 

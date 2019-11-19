@@ -54,9 +54,11 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+       
         public List<Carrier> getCarriersWithDepot()
         {
-            var carriers = new TMSDAL().GetCarriers(this);
+            //need to change method below. should be carrierbycity
+            var carriers = new TMSDAL().GetCarrierByName(this);
             return carriers;
         }
     }

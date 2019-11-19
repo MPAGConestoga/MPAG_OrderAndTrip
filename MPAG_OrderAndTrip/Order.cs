@@ -83,6 +83,9 @@ namespace MPAG_OrderAndTrip
             this.destination = destination;
             dateCreated = DateTime.Now;
         }
+        public Order()
+        {
+        }
       
         public Order CreateOrder(bool jobType, uint quantity, string origin, string destination, bool vanType)
         {
