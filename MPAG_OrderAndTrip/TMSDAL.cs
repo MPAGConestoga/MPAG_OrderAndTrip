@@ -10,7 +10,7 @@ namespace MPAG_OrderAndTrip
 {
     class TMSDAL
     {
-        private string buyerConnectionString = "server=127.0.0.1;user id=buyer;database=tms;password=conestoga;SslMode=none";
+        private string buyerConnectionString = "server=127.0.0.1;user id=buyer;database=tms;password=Conestoga;SslMode=required";
         //gg
         public void InsertOrder(Order order)
         {
@@ -112,7 +112,7 @@ namespace MPAG_OrderAndTrip
             }
         }
 
-        public void SearchForCustomer(Person person)
+        public void GetCustomerInformation(Person person)
         {
             //Comparison should be done by the person name. 
             const string sqlStatement = @"SELECT 

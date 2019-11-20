@@ -57,7 +57,7 @@ namespace MPAG_OrderAndTrip
 
         public void GetPersonInfo()
         {
-            new TMSDAL().SearchForCustomer(this);
+            new TMSDAL().GetCustomerInformation(this);
         }
     }
 }
