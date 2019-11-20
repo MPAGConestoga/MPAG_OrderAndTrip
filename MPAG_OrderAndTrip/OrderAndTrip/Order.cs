@@ -8,13 +8,14 @@ namespace MPAG_OrderAndTrip
 {
     public class Order : IOrderCreation
     {
+        // Constants
+        // Debug: Access the database to get the Valid Cities
+        private static readonly List<string> ValidCities = new List<string> { "Toronto", "Waterloo" };  
+
         //--------- Attributes ---------//
         public int orderID { get; set; }
 
         private string _origin;
-        private string _destination;
-        private static readonly List<string> ValidCities =    //----DEBUG:
-            new List<string> {"Toronto", "Waterloo"};         // Access the database to get the Valid Cities
         public string origin
         {
             get { return _origin; }
@@ -28,6 +29,8 @@ namespace MPAG_OrderAndTrip
                 _origin = value;
             }
         }
+
+        private string _destination;
         public string destination
         {
             get { return _destination; }
@@ -47,7 +50,9 @@ namespace MPAG_OrderAndTrip
         public bool jobType { get; set; }           
         public bool vanType { get; set; }
         public DateTime dateCreated { get; set; }
+        public List<Trip> assignedTrips = null;         // How do I attribute visibility to Collections
         public DateTime dateCompleted { get; set; }
+
 
         //--------- Methods ---------//
         private static bool ValidateCity(string newCity)
@@ -64,6 +69,11 @@ namespace MPAG_OrderAndTrip
             }
 
             return isValid;
+        }
+
+        public Order()
+        {
+
         }
 
         public Order(bool jobType, uint quantity, string origin, string destination, bool vanType)
@@ -86,7 +96,7 @@ namespace MPAG_OrderAndTrip
       
         public Order CreateOrder(bool jobType, uint quantity, string origin, string destination, bool vanType)
         {
-            Order newOrder = new Order( jobType, quantity, origin, destination, vanType);
+            Order newOrder = new Order(jobType, quantity, origin, destination, vanType);
             return newOrder;
         }
 

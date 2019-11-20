@@ -11,8 +11,10 @@ namespace MPAG_OrderAndTrip
         private List<Order> CreatedOrders;
 
         // Constructor 
-        public Buyer(string firstName, string lastName, string email, string address, string phoneNum = "NA") : 
-            base("Buyer", firstName, lastName, email, address, phoneNum)
+        public Buyer
+            (string firstName, string lastName, string email, string phoneNum, 
+            string streetAddress, string city, string province, string postalCode) : 
+            base("Buyer", firstName, lastName, email, phoneNum, streetAddress, city, province, postalCode)
         {
             CreatedOrders = new List<Order>();
         }

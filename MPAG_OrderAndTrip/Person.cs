@@ -11,14 +11,17 @@ namespace MPAG_OrderAndTrip
         public string lastName { get; set; }
         public string phoneNum { get; set; }
         public string email { get; set; }
-        private string address{get; set;}
+        public Address personAddress { get; set; }
 
-        public Person(string firstName, string lastName, string email, string address, string phoneNum)
+        //--------- Methods ---------//
+        public Person(string firstName, string lastName, string email, string phoneNum, 
+            string streetAddress, string city, string province, string postalCode)
         {
             this.personID = 1;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.address = address;
+            Address temp = new Address(streetAddress, city, province, postalCode);
+            personAddress = temp;
             this.phoneNum = phoneNum;
 
             if(ValidateEmail(email))

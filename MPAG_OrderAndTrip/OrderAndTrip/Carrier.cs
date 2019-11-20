@@ -6,38 +6,41 @@ namespace MPAG_OrderAndTrip
 {
     class Carrier
     {
+        // ---------- Attributes ---------------//
+        // Contact information
         public int carrierId { get; set; }
         public string carrierName { get; set; }
-        private List<string> DepotCities = null;   // How to access a list??
-        private int availibleFTL;
-        private int avalibleLTL;
+        public string Phone { get; set; }
+        public string Email { get; set; }
+            
+        // Business Information
+        public Dictionary<string, Depot> CityDepots = null;             // Key can be city ID???
         private double FTLRate;
         private double LTLRate;
         private double ReeferCharge;
-        public string Phone { get; set; }
-        public string Email { get; set; }
 
+
+        // ---------- Constructors ---------------//
         // Temporary Constructor: the Carrier should only be created by the Admin Class -> Implement interface AdminRoles:CreateCarrier
-        public Carrier(string name, int initialAvaFTL, int initialAvaLTL, double rateFTL, double rateLTL, double charge, List<string> initialDepots)
+        public Carrier(string name, double rateFTL, double rateLTL, double charge, Dictionary<string, Depot> initialDepots)
         {
             Random rng = new Random();            // DEBUG: This is a placeholder for the CarrierId that will
             carrierId = rng.Next(10000, 99000);   // be grabbed from the database baased on the Id of the last order
 
             //-----------------------PART of the ADMIN ROLE------------------------------------------------//
             carrierName = name;
-            availibleFTL = initialAvaFTL;
-            avalibleLTL = initialAvaLTL;
             FTLRate = rateFTL;
             LTLRate = rateLTL;
             ReeferCharge = charge;
 
-            DepotCities = initialDepots;   // The admin will list the availible cities for that carrier
+            CityDepots = initialDepots;   // The admin will list the availible cities for that carrier
         }
 
         public Carrier()
         {
         }
 
+        // ---------- Methods---------------//
         public void ChangeFTLRate(Carrier someCarrier, double newFTLRate)
         {
             if(newFTLRate > 0.00)

@@ -47,19 +47,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Carrier.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="IOrderCreation.cs" />
-    <Compile Include="Order.cs" />
+    <Compile Include="Address.cs" />
+    <Compile Include="OrderAndTrip\Carrier.cs" />
+    <Compile Include="Employees\Employee.cs" />
+    <Compile Include="Interfaces\IOrderCreation.cs" />
+    <Compile Include="OrderAndTrip\Depot.cs" />
+    <Compile Include="OrderAndTrip\Order.cs" />
+    <Compile Include="OrderAndTrip\Trip.cs" />
+    <Compile Include="OrderAndTrip\WaitingTruck.cs" />
     <Compile Include="Person.cs" />
-    <Compile Include="Planner.cs" />
+    <Compile Include="Employees\Planner.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Buyer.cs" />
+    <Compile Include="Employees\Buyer.cs" />
     <Compile Include="TMSDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
