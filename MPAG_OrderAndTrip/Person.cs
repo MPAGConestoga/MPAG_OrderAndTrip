@@ -13,6 +13,7 @@ namespace MPAG_OrderAndTrip
         public string email { get; set; }
         public Address personAddress { get; set; }
 
+
         //--------- Methods ---------//
         public Person(string firstName, string lastName, string email, string phoneNum, 
             string streetAddress, string city, string province, string postalCode)
@@ -28,6 +29,10 @@ namespace MPAG_OrderAndTrip
             {
                 this.email = email;
             }
+        }
+
+        public Person()
+        {
         }
 
         // Reference: https://stackoverflow.com/questions/5342375/regex-email-validation
@@ -52,6 +57,11 @@ namespace MPAG_OrderAndTrip
             {
                 email = newEmail;
             }
+        }
+
+        public void GetPersonInfo()
+        {
+            new TMSDAL().GetCustomerInformation(this);
         }
     }
 }
