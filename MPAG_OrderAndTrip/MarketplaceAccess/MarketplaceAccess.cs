@@ -13,6 +13,10 @@ namespace BuyerAccessToMarketplace
     {
         static volatile bool Run = true;
         static void Main(string[] args)
+
+            // GETTING STUFF FROM MARK
+
+               //
         {
             //Setup database connection and tables
             Console.WriteLine("{0,-20}\t{1,-10}\t{2,-10}\t{3,-15}\t{4,-15}\t{5,-10}",
