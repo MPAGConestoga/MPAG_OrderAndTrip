@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace BuyerAccessToMarketplace
 {
-    /// 
-    /// \class Market Contract
-    /// 
-    /// \brief Purpose of this is to model the
-    /// database extraction 
-    /// 
-    /// 
-    /// 
+    /* 
+    * \class Market Contract
+    * 
+    * \brief Purpose of this is to model the
+    * database extraction 
+    * 
+    * \see
+    * 
+    * \author Amy Dayasundara
+    */ 
     public class marketContract
     {
         public string clientName { get; set; }
@@ -26,14 +28,20 @@ namespace BuyerAccessToMarketplace
         public marketContract() { }
 
         //Save?
-
+         
         //GetById..?
 
-        /**
-        *\brief 
-        *\details <b>Get Internal Contract</b>
-        *\return Returns a list of the current internal contracts being generated
-         */
+        ///
+        /// \brief Once the internal contracts are retireved, they are inserted into a list
+        /// 
+        /// \details <b>Get Internal Contract</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
 
         public List<marketContract> GetMarketContracts()
         {

@@ -10,7 +10,7 @@ namespace MPAG_OrderAndTrip
     {
         //--------- Attributes ---------//
         private int employeeID;         // Key
-        private string password;
+        //private string password;
         private int roleID;
 
         private static Dictionary<int,string> validRoles = new Dictionary<int, string>()
@@ -19,9 +19,11 @@ namespace MPAG_OrderAndTrip
             { 1, "Planner" },
             { 2, "Admin"}
         };
-        
-        public Employee(string roleID, string firstName, string lastName, string email, string address, string phoneNum = "NA") : 
-            base(firstName, lastName, email, address, phoneNum)
+
+        public Employee
+            (string roleID, string firstName, string lastName, string email, string phoneNum, 
+            string streetAddress, string city, string province, string postalCode) : 
+            base(firstName, lastName, email, phoneNum, streetAddress, city, province, postalCode)
         {
             int possibleRole = ValidateRole(roleID);
             if(possibleRole != -1)

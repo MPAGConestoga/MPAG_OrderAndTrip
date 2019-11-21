@@ -6,24 +6,33 @@ namespace MPAG_OrderAndTrip
     public class Person
     {
         //--------- Attributes ---------//
-        private int personID;           // Key
-        private string firstName;
-        private string lastName;
-        private string phoneNum;
-        private string email;
-        private string address;
+        public int personID { get; set; }           // Key
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string phoneNum { get; set; }
+        public string email { get; set; }
+        public Address personAddress { get; set; }
 
-        public Person(string firstName, string lastName, string email, string address, string phoneNum)
+
+        //--------- Methods ---------//
+        public Person(string firstName, string lastName, string email, string phoneNum, 
+            string streetAddress, string city, string province, string postalCode)
         {
+            this.personID = 1;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.address = address;
+            Address temp = new Address(streetAddress, city, province, postalCode);
+            personAddress = temp;
             this.phoneNum = phoneNum;
 
             if(ValidateEmail(email))
             {
                 this.email = email;
             }
+        }
+
+        public Person()
+        {
         }
 
         // Reference: https://stackoverflow.com/questions/5342375/regex-email-validation
@@ -48,6 +57,11 @@ namespace MPAG_OrderAndTrip
             {
                 email = newEmail;
             }
+        }
+
+        public void GetPersonInfo()
+        {
+            new TMSDAL().GetCustomerInformation(this);
         }
     }
 }

@@ -7,6 +7,7 @@ using BuyerAccessToMarketplace;
 
 namespace BuyerAccessToMarketplace
 {
+    //TBD
     public class InternalContract
     {
         //InternalID representing Supplier - Product Management
@@ -14,11 +15,17 @@ namespace BuyerAccessToMarketplace
         public string ClientName { get; set; }
         public InternalContract() { }
 
-        /**
-        *\brief 
-        *\details <b>Get Internal Contract</b>
-        *\return Returns a list of the current internal contracts being generated
-         */
+        ///
+        /// \brief Once the internal contracts are retireved, they are inserted into a list
+        /// 
+        /// \details <b>Get Internal Contract</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
         public List<InternalContract> GetInternalContracts()
         {
             var internalContract = new ContractMarketDals().GetInternalContracts();
