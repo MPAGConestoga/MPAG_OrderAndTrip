@@ -12,35 +12,48 @@ namespace BuyerAccessToMarketplace
     class MarketplaceAccess
     {
         static volatile bool Run = true;
-        static void Main(string[] args)
+        //static void Main(string[] args)
 
-            // GETTING STUFF FROM MARK
+        //    // GETTING STUFF FROM MARK
 
-               //
-        {
-            //Setup database connection and tables
-            Console.WriteLine("{0,-20}\t{1,-10}\t{2,-10}\t{3,-15}\t{4,-15}\t{5,-10}",
-                    "Client_Name",
-                    "Job_Type",
-                    "Quantity",
-                    "Origin",
-                    "Destination",
-                    "Van_Type");
+        //       //
+        //{
+        //    //Setup database connection and tables
+        //    Console.WriteLine("{0,-20}\t{1,-10}\t{2,-10}\t{3,-15}\t{4,-15}\t{5,-10}",
+        //            "Client_Name",
+        //            "Job_Type",
+        //            "Quantity",
+        //            "Origin",
+        //            "Destination",
+        //            "Van_Type");
 
-            Thread data = new Thread(new ThreadStart(Database));
-            data.Start();
-            //Stop pull
-            Console.ReadKey();
+        //    Thread data = new Thread(new ThreadStart(Database));
+        //    data.Start();
+        //    //Stop pull
+        //    Console.ReadKey();
 
-            //Set running to false
-            Run = false;
-            data.Join();
-            //Exit console
-            Console.WriteLine("Press key to quit console.");
-            Console.ReadKey();
-            //Initial upload of information 
-            //Update information and store for 30 rows. 50s
-        }
+        //    //Set running to false
+        //    Run = false;
+        //    data.Join();
+        //    //Exit console
+        //    Console.WriteLine("Press key to quit console.");
+        //    Console.ReadKey();
+        //    //Initial upload of information 
+        //    //Update information and store for 30 rows. 50s
+        //}
+
+
+        ///
+        /// \brief Start database and pull information 
+        /// 
+        /// \details <b>Database Extraction</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return nothing
+        /// 
+        /// \see
+        ///
 
         public static void Database()
         {
@@ -77,7 +90,7 @@ namespace BuyerAccessToMarketplace
                 }
                 reader.Close();
 
-                //Is this where the gap is bridged, where the UI pulls info
+                //Is this where the gap is bridged, where the UI pulls info?
                 //The the user clicks the row and it gets input into the marketContract/ internalContract
                 //class?
 
@@ -103,12 +116,35 @@ namespace BuyerAccessToMarketplace
 
         }
 
+        ///
+        /// \brief Connection for the database
+        /// 
+        /// \details <b>Get Connection from the Database</b> - set as private
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns connection string
+        /// 
+        /// \see
+        ///
         static private string GetConnection()
         {
             string connection = "Server=159.89.117.198;Port = 3306; Database = cmp; Uid = DevOSHT; password = Snodgr4ss!;";
             return connection;
         }
         //Select row -- Also choose the current time of decision of Order picked
+        ///
+        /// \brief 
+        /// 
+        /// \details <b>Data Table to Market Contract</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
+
         private static List<marketContract> DataTableToMarketContract(DataTable table)
         {
             var marketContractList = new List<marketContract>();

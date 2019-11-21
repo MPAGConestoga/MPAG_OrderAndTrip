@@ -153,7 +153,7 @@ namespace MPAG_OrderAndTrip
                     person.lastName = row["Last_Name"].ToString();
                     person.phoneNum = row["Phone"].ToString();
                     person.email = row["Email"].ToString();
-                    person.address = ((row["Street_Address"].ToString()) + (row["City"].ToString()) + (row["Province"].ToString()) + (row["Postal_Code"].ToString()));
+                    //person.address = ((row["Street_Address"].ToString()) + (row["City"].ToString()) + (row["Province"].ToString()) + (row["Postal_Code"].ToString()));
                 }
             }
 
