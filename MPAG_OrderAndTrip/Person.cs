@@ -3,6 +3,13 @@ using System.Net.Mail;
 
 namespace MPAG_OrderAndTrip
 {
+    /** \class
+     * \brief Class used to represent a person: customer or employee
+     * \details The Person class is used for holding information about a customer or employee. The Customer
+     * and Employee class both inherit from this class. 
+     * \see Employee, Customer
+     *
+     */
     public class Person
     {
         //--------- Attributes ---------//
@@ -14,7 +21,17 @@ namespace MPAG_OrderAndTrip
         public Address personAddress { get; set; }
 
 
-        //--------- Methods ---------//
+        /// <summary>
+        /// This constructor is used to instantiate a Person with the specified field values
+        /// </summary>
+        /// <para name="firstName"> <b>string</b> - Customer first name</param>
+        /// <para name="lastName"> <b>string</b> - Customer last name</param>
+        /// <para name="email"> <b>string</b> - Customer email</param>
+        /// <para name="phoneNum"> <b>string</b> - Customer phone number</param>
+        /// <para name="streetAddress"> <b>string</b> - Customer street address</param>
+        /// <para name="city"> <b>string</b> - Customer's city</param>
+        /// <para name="province"> <b>string</b> - Customer's province</param>
+        /// <para name="postalCode"> <b>string</b> - Customer's postal code</param>
         public Person(string firstName, string lastName, string email, string phoneNum, 
             string streetAddress, string city, string province, string postalCode)
         {
@@ -31,13 +48,22 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+        /// <summary>
+        /// The default constructor for the person class
+        /// </summary>
         public Person()
         {
         }
-
-        // Reference: https://stackoverflow.com/questions/5342375/regex-email-validation
+        
+        /// <summary>
+        /// This method is used to validate that an email is in the correct format
+        /// </summary>
+        /// <para name="email"> <b>string</b> - Customer email</param>
+        /// \see Person::ChangeEmail()
         private static bool ValidateEmail(string email)
         {
+            // Reference: https://stackoverflow.com/questions/5342375/regex-email-validation
+
             try
             {
                 MailAddress verify = new MailAddress(email);
@@ -49,8 +75,11 @@ namespace MPAG_OrderAndTrip
             }
         }
 
-        // Setters -------------------------//
-        // How does this work with a database -> Is it updated first here and then in the DB?
+        /// <summary>
+        /// This method is used to change the email of a customer
+        /// </summary>
+        /// <para name="email"> <b>string</b> - Customer email</param>
+        /// \see Person::ValidateEmail()
         public void ChangeEmail(string newEmail)
         {
             if(ValidateEmail(newEmail))
@@ -59,6 +88,12 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+        /// <summary>
+        /// This method is used to submit the person information to the database.
+        /// The Data access layer class is instantiated and used to submit the data.
+        /// </summary>
+        ///
+        /// \see TMSDAL::GetCustomerInformation()
         public void GetPersonInfo()
         {
             new TMSDAL().GetCustomerInformation(this);
