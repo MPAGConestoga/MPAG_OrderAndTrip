@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MPAG_OrderAndTrip
 {
+    /**
+     * \brief   The Trip class represent the one trip associated with an order.
+     * \details The Trip         based on the order type and reefer charge.
+     */
     public class Trip
     {
         public string lastStop { get; set; }
