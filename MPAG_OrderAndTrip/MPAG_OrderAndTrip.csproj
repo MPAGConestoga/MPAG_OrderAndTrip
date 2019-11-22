@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="MarketplaceAccess\ContractMarketDals.cs" />
+    <Compile Include="MarketplaceAccess\InternalContract.cs" />
+    <Compile Include="MarketplaceAccess\marketContract.cs" />
+    <Compile Include="MarketplaceAccess\MarketplaceAccess.cs" />
     <Compile Include="OrderAndTrip\Carrier.cs" />
     <Compile Include="Employees\Employee.cs" />
     <Compile Include="Interfaces\IOrderCreation.cs" />

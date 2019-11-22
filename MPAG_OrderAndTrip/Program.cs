@@ -3,16 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using BuyerAccessToMarketplace;
 
 namespace MPAG_OrderAndTrip
 {
     class Program
     {
+        static volatile bool Run = true;
         static void Main(string[] args)
         {
 
-            // TEST FOR THE FULL WORKFLOW OF BUYER AND PLANNER      
+            // ------ TEST FOR THE FULL WORKFLOW OF BUYER AND PLANNER ---------- //    
 
             /*Order newOrder = null;
 
@@ -42,8 +45,28 @@ namespace MPAG_OrderAndTrip
             //var list = new TMSDAL().GetCarriersByCity("Guelph");
             //Console.WriteLine("");
 
-            
-            // BUYER WORKFLOW
+            // --------------------------- CONTRACT MARKET PLACE PULL -------------------- //
+            Console.WriteLine("{0,-20}\t{1,-10}\t{2,-10}\t{3,-15}\t{4,-15}\t{5,-10}",
+                    "Client_Name",
+                    "Job_Type",
+                    "Quantity",
+                    "Origin",
+                    "Destination",
+                    "Van_Type");
+            //Start Thread
+            Thread data = new Thread(new ThreadStart(MarketplaceAccess.Database));
+            data.Start();
+
+            //Stop data pull
+            Console.ReadKey();
+            Run = false;
+            data.Join();
+
+            //Quit console
+            Console.WriteLine("Press key to quit console.");
+            Console.ReadKey();
+
+            // ------------------------------ BUYER WORKFLOW -----------------------------------//
             // Creating Buyer
             Buyer empBuyer = new Buyer("John", "Wick", "johnWickWhatever@gmail.com", "555789849", 
                                        "DamnStreet", "Waterloo", "Ontario", "N2E6D0");
@@ -53,7 +76,7 @@ namespace MPAG_OrderAndTrip
 
             // PLACEHOLDER: Send to the database -> will set status to [PENDING]
 
-            // PLANNER WORKFLOW
+            // ------------------------------ PLANNER WORKFLOW --------------------------------//
             // Create Planner
             Planner empPlanner = new Planner("Ulfric", "Stormcloack", "freeSkyrim@uol.com", "555789849",
                            "DamnStreet", "Waterloo", "Ontario", "N2E6D0");
