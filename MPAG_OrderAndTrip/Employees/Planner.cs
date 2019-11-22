@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MPAG_OrderAndTrip
 {
@@ -38,8 +35,9 @@ namespace MPAG_OrderAndTrip
         /// <returns>Returns the List of all relevant carriers that can accomplish a particular order </returns>
         public List<Carrier> GetRelevantCarriers(string origin)
         {
-            // Stubbed Out code -> Waiting for Data Acess Layer for the Relevant Cities
-            Dictionary<string,Depot> tempDepotCities = new Dictionary<string, Depot>
+            // Stubbed Out code -----IMPLEMENT -----------------------//
+            // -> Waiting for Data Acess Layer for the Relevant Cities
+            Dictionary<string, Depot> tempDepotCities = new Dictionary<string, Depot>
             {
                 {"Toronto", new Depot("Toronto", 10, 5) },
                 { "Waterloo", new Depot("Waterloo", 20, 10) },
@@ -53,6 +51,30 @@ namespace MPAG_OrderAndTrip
 
             List<Carrier> possibleCarriers = new List<Carrier> { possCarrier1, possCarrier2, possCarrier3, possCarrier4 };
             return possibleCarriers;
+        }
+
+        public bool SelectCarriers(List<Carrier> SelectedCarriers, Order pendingOrder)
+        {
+            // Stubbed Out ----------------------- IMPLEMENT -----------------------//
+            return true;
+        }
+
+        public void ChangeOrderSpeedTime(Order activeOrder, int daysToAdvance)
+        {
+            // Stubbed Out ----------------------- IMPLEMENT -----------------------// 
+        }
+
+        public bool ConfirmOrderCompletion(Order activeOrder)
+        {
+            // Stubbed Out ----------------------- IMPLEMENT -----------------------//
+            return true;
+        }
+
+        public List<Invoice> ShowInvoiceSummary(Enum selectTime)
+        {
+            // Stubbed Out ----------------------- IMPLEMENT -----------------------//
+            List<Invoice> SummaryInvoice = new List<Invoice>();
+            return SummaryInvoice;
         }
     }
 }
