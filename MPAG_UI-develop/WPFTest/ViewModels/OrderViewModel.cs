@@ -9,9 +9,8 @@ using WPFTest.Utilities;
 namespace WPFTest.ViewModels
 {
     /**
-    * \Class OrderViewModel
-    * \Brief View model for the handling of the order view
-    * \Details The order view model loads and handles the information that will be 
+    * \brief View model for the handling of the order view
+    * \details The order view model loads and handles the information that will be 
     * displayed to the user in the planner role. Pending and active orders will be 
     * loaded, as well as the carriers to be attached to the orders. Will also 
     * instantiate instances of the child view models: PendingViewModel and ActiveViewModel.

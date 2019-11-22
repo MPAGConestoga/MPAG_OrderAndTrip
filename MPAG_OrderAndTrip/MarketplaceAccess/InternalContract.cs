@@ -7,7 +7,14 @@ using BuyerAccessToMarketplace;
 
 namespace BuyerAccessToMarketplace
 {
-    //TBD
+    /**
+    * 
+    * \brief This class is used to confirm the customer from the contract
+    * is a valid customer
+    * 
+    * 
+    * \author Amy Dayasundara
+    */
     public class InternalContract
     {
         //InternalID representing Supplier - Product Management

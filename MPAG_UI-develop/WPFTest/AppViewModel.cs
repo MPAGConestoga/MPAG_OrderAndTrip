@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace WPFTest
 {
     /**
-    * \Class OrderViewModel
-    * \Brief View model for the handling of the main window view
-    * \Details The app view model loads and handles the information that will be 
+    *
+    * \brief View model for the handling of the main window view
+    * \details The app view model loads and handles the information that will be 
     * displayed to the user on the landing page for the planner role. Instantiates
     * a child instance of the order view model which will be displayed in the window beneath
     * the upper bar of the app.

@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 namespace WPFTest
 {
     /**
-    * \Class ObservableObject
-    * \Brief Base class for MVVM view models
-    * \Details Interface allowing update messages to be sent to the view
+    * \brief Base class for MVVM view models
+    * \details Interface allowing update messages to be sent to the view
     * files for their respective view models. Inherits from the INotifyPropertyChanged
     * interface.
     */
