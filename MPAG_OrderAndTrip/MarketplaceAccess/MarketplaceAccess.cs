@@ -8,8 +8,7 @@ using System.Configuration;
 
 namespace BuyerAccessToMarketplace
 {
-    /* 
-    * \class Marketplace Access
+    /**
     * 
     * \brief Initial start for the database connection to the marketplace
     * 

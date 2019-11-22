@@ -8,8 +8,8 @@ using MySql.Data.MySqlClient;
 
 namespace MPAG_OrderAndTrip
 {
-    /** \class
-     * \brief Class used for data access with the local TMS database
+    /** 
+     * \brief The TMSDAL class is used as the data access layer with the TMS database
      * \details The TMSDAL contains the functionality for interaction with the locally-hosted database and the user, buyer and planner class.
      * Within the class are three connection strings that hold the different login credentials of the three users.
      * \see
