@@ -24,14 +24,14 @@ namespace MPAG_OrderAndTrip
         /// <summary>
         /// This constructor is used to instantiate a Person with the specified field values
         /// </summary>
-        /// <para name="firstName"> <b>string</b> - Customer first name</param>
-        /// <para name="lastName"> <b>string</b> - Customer last name</param>
-        /// <para name="email"> <b>string</b> - Customer email</param>
-        /// <para name="phoneNum"> <b>string</b> - Customer phone number</param>
-        /// <para name="streetAddress"> <b>string</b> - Customer street address</param>
-        /// <para name="city"> <b>string</b> - Customer's city</param>
-        /// <para name="province"> <b>string</b> - Customer's province</param>
-        /// <para name="postalCode"> <b>string</b> - Customer's postal code</param>
+        /// <param name="firstName"> <b>string</b> - Customer first name</param>
+        /// <param name="lastName"> <b>string</b> - Customer last name</param>
+        /// <param name="email"> <b>string</b> - Customer email</param>
+        /// <param name="phoneNum"> <b>string</b> - Customer phone number</param>
+        /// <param name="streetAddress"> <b>string</b> - Customer street address</param>
+        /// <param name="city"> <b>string</b> - Customer's city</param>
+        /// <param name="province"> <b>string</b> - Customer's province</param>
+        /// <param name="postalCode"> <b>string</b> - Customer's postal code</param>
         public Person(string firstName, string lastName, string email, string phoneNum, 
             string streetAddress, string city, string province, string postalCode)
         {
@@ -58,7 +58,7 @@ namespace MPAG_OrderAndTrip
         /// <summary>
         /// This method is used to validate that an email is in the correct format
         /// </summary>
-        /// <para name="email"> <b>string</b> - Customer email</param>
+        /// <param name="email"> <b>string</b> - Customer email</param>
         /// \see Person::ChangeEmail()
         private static bool ValidateEmail(string email)
         {
@@ -78,7 +78,7 @@ namespace MPAG_OrderAndTrip
         /// <summary>
         /// This method is used to change the email of a customer
         /// </summary>
-        /// <para name="email"> <b>string</b> - Customer email</param>
+        /// <param name="email"> <b>string</b> - Customer email</param>
         /// \see Person::ValidateEmail()
         public void ChangeEmail(string newEmail)
         {

@@ -39,11 +39,11 @@ namespace MPAG_OrderAndTrip
         /// <summary>
         /// This method is used to Create a new order given specified values
         /// </summary>
-        /// <para name="jobType"> <b>bool</b> - Order job type(LTL or FTL)</param>
-        /// <para name="quantity"> <b>unint</b> - Quantity of the job</param>
-        /// <para name="origin"> <b>string</b> - Where the order will be shipped from</param>
-        /// <para name="destination"> <b>string</b> - Where the order will be shipped to/param>
-        /// <para name="vanType"> <b>bool</b> - Van type:dry or reefer</param>
+        /// <param name="jobType"> <b>bool</b> - Order job type(LTL or FTL)</param>
+        /// <param name="quantity"> <b>unint</b> - Quantity of the job</param>
+        /// <param name="origin"> <b>string</b> - Where the order will be shipped from</param>
+        /// <param name="destination"> <b>string</b> - Where the order will be shipped to/param>
+        /// <param name="vanType"> <b>bool</b> - Van type:dry or reefer</param>
 
         /// \see Order 
         public Order CreateOrder(bool jobType, uint quantity, string origin, string destination, bool vanType)
