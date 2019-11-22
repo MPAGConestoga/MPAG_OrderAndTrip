@@ -15,17 +15,17 @@ namespace BuyerAccessToMarketplace
         public string ClientName { get; set; }
         public InternalContract() { }
 
-        ///
-        /// \brief Once the internal contracts are retireved, they are inserted into a list
-        /// 
-        /// \details <b>Get Internal Contract</b>
-        /// 
-        /// \param none
-        /// 
-        /// \return Returns a list of the current internal contracts being generated
-        /// 
-        /// \see
-        ///
+        ///// Don't include into this Doxygen run
+        ///// \brief Once the internal contracts are retireved, they are inserted into a list
+        ///// 
+        ///// \details <b>Get Internal Contract</b>
+        ///// 
+        ///// \param none
+        ///// 
+        ///// \return Returns a list of the current internal contracts being generated
+        ///// 
+        ///// \see
+        /////
         public List<InternalContract> GetInternalContracts()
         {
             var internalContract = new ContractMarketDals().GetInternalContracts();

@@ -9,13 +9,14 @@ using BuyerAccessToMarketplace;
 
 namespace MPAG_OrderAndTrip
 {
+
     class Program
     {
         static volatile bool Run = true;
         static void Main(string[] args)
         {
 
-            // ------ TEST FOR THE FULL WORKFLOW OF BUYER AND PLANNER ---------- //    
+            // -------------- TEST FOR THE FULL WORKFLOW OF BUYER AND PLANNER ------------ //    
 
             /*Order newOrder = null;
 
@@ -44,9 +45,9 @@ namespace MPAG_OrderAndTrip
             //test.carrierName = "Carrier 1";
             //var list = new TMSDAL().GetCarriersByCity("Guelph");
             //Console.WriteLine("");
-
             // --------------------------- CONTRACT MARKET PLACE PULL -------------------- //
-            Console.WriteLine("{0,-20}\t{1,-10}\t{2,-10}\t{3,-15}\t{4,-15}\t{5,-10}",
+            Console.WriteLine("{0, -6}\t{1,-20}\t{2,-10}\t{3,-10}\t{4,-15}\t{5,-15}\t{6,-10}",
+                    "Row #",
                     "Client_Name",
                     "Job_Type",
                     "Quantity",
@@ -57,35 +58,42 @@ namespace MPAG_OrderAndTrip
             Thread data = new Thread(new ThreadStart(MarketplaceAccess.Database));
             data.Start();
 
-            //Stop data pull
-            Console.ReadKey();
-            Run = false;
+            while (Run)
+            {
+                //Read key pressed too see if it is a row selected
+                string key = Console.ReadLine();
+                MarketplaceAccess.ReadKeyInterpretation(key);
+
+                //Stop data pull
+                
+
+                // ------------------------------ BUYER WORKFLOW ----------------------------------- //
+                // Creating Buyer
+                Buyer empBuyer = new Buyer("John", "Wick", "johnWickWhatever@gmail.com", "555789849", 
+                                           "DamnStreet", "Waterloo", "Ontario", "N2E6D0");
+
+                // Buyer got info from contract marketplace, now they are creating order to submit to planner 
+                Order newOrder = empBuyer.CreateOrder(true, 10, "Toronto", "Waterloo", false);
+
+                // PLACEHOLDER: Send to the database -> will set status to [PENDING]
+
+                // ------------------------------ PLANNER WORKFLOW -------------------------------- //
+                // Create Planner
+                Planner empPlanner = new Planner("Ulfric", "Stormcloack", "freeSkyrim@uol.com", "555789849",
+                               "DamnStreet", "Waterloo", "Ontario", "N2E6D0");
+
+                // Get list of relevant cities
+                List<Carrier> relevantCarriers = new List<Carrier> (empPlanner.GetRelevantCarriers(newOrder.origin));
+
+                // Select Carrier 
+            }
+            //Close program
+            //Run = false;
             data.Join();
 
             //Quit console
             Console.WriteLine("Press key to quit console.");
             Console.ReadKey();
-
-            // ------------------------------ BUYER WORKFLOW -----------------------------------//
-            // Creating Buyer
-            Buyer empBuyer = new Buyer("John", "Wick", "johnWickWhatever@gmail.com", "555789849", 
-                                       "DamnStreet", "Waterloo", "Ontario", "N2E6D0");
-
-            // Buyer got info from contract marketplace, now they are creating order to submit to planner 
-            Order newOrder = empBuyer.CreateOrder(true, 10, "Toronto", "Waterloo", false);
-
-            // PLACEHOLDER: Send to the database -> will set status to [PENDING]
-
-            // ------------------------------ PLANNER WORKFLOW --------------------------------//
-            // Create Planner
-            Planner empPlanner = new Planner("Ulfric", "Stormcloack", "freeSkyrim@uol.com", "555789849",
-                           "DamnStreet", "Waterloo", "Ontario", "N2E6D0");
-
-            // Get list of relevant cities
-            List<Carrier> relevantCarriers = new List<Carrier> (empPlanner.GetRelevantCarriers(newOrder.origin));
-
-            // Select Carrier 
-            
 
 
         }
