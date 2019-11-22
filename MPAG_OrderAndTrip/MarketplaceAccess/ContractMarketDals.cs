@@ -7,12 +7,19 @@ using System.Data;
 
 namespace BuyerAccessToMarketplace
 {
+    /* 
+    * \class Contract Market DALS
+    * 
+    * \brief Setting up the DAL for contract market place -- temporary until UI integration
+    * 
+    * \see
+    * 
+    * \author Amy Dayasundara
+    */
     class ContractMarketDals
     {
         ///
-        /// \brief Get the internal contracts fromm the existing list
-        /// 
-        /// \details <b>Get Internal Contracts</b>
+        /// \brief <b>Get Internal Contracts</b> - Get the internal contracts fromm the existing list
         /// 
         /// \param none
         /// 
@@ -20,7 +27,6 @@ namespace BuyerAccessToMarketplace
         /// 
         /// \see
         ///
-
         public List<InternalContract> GetInternalContracts()
         {
             string sqlString = GetConnection();
@@ -45,13 +51,11 @@ namespace BuyerAccessToMarketplace
         }
 
         ///
-        /// \brief Retrieving the Contract Table list
-        /// 
-        /// \details <b>Get Internal Contract</b>
-        /// 
+        /// \brief <b>Get Marketcontract Table</b> - Retrieving the Contract Table list
+        ///
         /// \param none
         /// 
-        /// \return Returns a list of the current internal contracts being generated
+        /// \return Returns the datatable to the UI gridview
         /// 
         /// \see
         ///
@@ -77,9 +81,8 @@ namespace BuyerAccessToMarketplace
         }
 
         ///
-        /// \brief Retrieving the Contract Table list
-        /// 
-        /// \details <b>Get Internal Contract</b>
+        /// \brief <b>Get Market Contracts</b> - Hold accepted values into a list for later reference.
+        /// To be used for the Messenger logging file
         /// 
         /// \param none
         /// 
@@ -112,13 +115,11 @@ namespace BuyerAccessToMarketplace
         }
 
         ///
-        /// \brief Retrieving the Contract Table list
+        /// \brief <b>Data Table to Market List</b> - Converting table to list
+        ///  
+        /// <param name="data"> Take the data table pulled from the contract list</param>
         /// 
-        /// \details <b>Get Internal Contract</b>
-        /// 
-        /// \param none
-        /// 
-        /// \return Returns a list of the current internal contracts being generated
+        /// \return Returns a list of the current market contracts being generated
         /// 
         /// \see
         ///
@@ -142,6 +143,12 @@ namespace BuyerAccessToMarketplace
             return marketContracts;
         }
 
+        /// <summary>
+        ///     <b>Data Table to Internal List</b> - Internal list of accepted clients.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns> A list of internal contract types. </returns>
+
         private List<InternalContract> DataTableToInternalList(DataTable data)
         {
             var internalContracts = new List<InternalContract>();
@@ -157,6 +164,10 @@ namespace BuyerAccessToMarketplace
             return internalContracts;
         }
 
+        /// <summary>
+        ///     <b>Get Connection</b> - Get the connection of the database to be accessed 
+        /// </summary>
+        /// <returns> Returns the database string </returns>
         static private string GetConnection()
         {
             string connection = "Server=159.89.117.198;Port = 3306; Database = cmp; Uid = DevOSHT; password = Snodgr4ss!;";

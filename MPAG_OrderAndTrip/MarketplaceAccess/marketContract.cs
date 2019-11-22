@@ -42,16 +42,13 @@ namespace BuyerAccessToMarketplace
         /// 
         /// \see
         ///
-
         public List<marketContract> GetMarketContracts()
         {
             var contracts = new ContractMarketDals().GetMarketContracts();
             return contracts;
         }
-        //Tables
 
-        //Delete
-
+        //Delete??
     }
 }
 

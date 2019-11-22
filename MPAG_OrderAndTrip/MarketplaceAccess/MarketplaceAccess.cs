@@ -8,8 +8,17 @@ using System.Configuration;
 
 namespace BuyerAccessToMarketplace
 {
-    public static 
-    class MarketplaceAccess
+    /* 
+    * \class Marketplace Access
+    * 
+    * \brief Initial start for the database connection to the marketplace
+    * 
+    * \see
+    * 
+    * \author Amy Dayasundara
+    */
+
+    public class MarketplaceAccess
     {
         static volatile bool Run = true;
         //static void Main(string[] args)
@@ -44,9 +53,7 @@ namespace BuyerAccessToMarketplace
 
 
         ///
-        /// \brief Start database and pull information 
-        /// 
-        /// \details <b>Database Extraction</b>
+        /// \brief <b>Database</b> - Open Marketplace database and pull information 
         /// 
         /// \param none
         /// 
@@ -57,7 +64,10 @@ namespace BuyerAccessToMarketplace
 
         public static void Database()
         {
-            while(Run)
+            int counter = 0;
+            var data = new DataTable();
+
+            while (Run)
             { 
                 //Conncetion for the database 
                 string connectionStr = GetConnection();
@@ -80,7 +90,8 @@ namespace BuyerAccessToMarketplace
                 //Reads the rows from the contract marketplace until null
                 while (reader.Read())
                 {
-                    Console.WriteLine("{0,-20}\t{1,-10}\t{2,-10}\t{3,-15}\t{4,-15}\t{5,-10}",
+                    Console.WriteLine("{0, -6}\t{1,-20}\t{2,-10}\t{3,-10}\t{4,-15}\t{5,-15}\t{6,-10}",
+                        ++counter,
                         reader["Client_Name"].ToString(),
                         reader["Job_Type"].ToString(),
                         reader["Quantity"].ToString(),
@@ -102,24 +113,21 @@ namespace BuyerAccessToMarketplace
                         SelectCommand = command
                     };
 
-                    var data = new DataTable();
                     adapter.Fill(data);
-                    
-                    var internalMarket = DataTableToMarketContract(data);
+                    //var internalMarket = DataTableToMarketContract(data);
                     //return internalMarket;
                 };
                 //Sleep for 10s
                 Thread.Sleep(10000);
 
             }
+            
             Console.WriteLine("Stopped");
 
         }
 
         ///
-        /// \brief Connection for the database
-        /// 
-        /// \details <b>Get Connection from the Database</b> - set as private
+        /// \brief <b>Get Connection from the Database</b> Connection for the database
         /// 
         /// \param none
         /// 
@@ -132,11 +140,9 @@ namespace BuyerAccessToMarketplace
             string connection = "Server=159.89.117.198;Port = 3306; Database = cmp; Uid = DevOSHT; password = Snodgr4ss!;";
             return connection;
         }
-        //Select row -- Also choose the current time of decision of Order picked
+
         ///
-        /// \brief 
-        /// 
-        /// \details <b>Data Table to Market Contract</b>
+        /// \brief <b>Data Table to Market Contract</b> Insert into a marketplace list to be future accessed by the buyer
         /// 
         /// \param none
         /// 
@@ -144,7 +150,6 @@ namespace BuyerAccessToMarketplace
         /// 
         /// \see
         ///
-
         private static List<marketContract> DataTableToMarketContract(DataTable table)
         {
             var marketContractList = new List<marketContract>();
@@ -165,12 +170,71 @@ namespace BuyerAccessToMarketplace
 
             return marketContractList;
         }
-        //Class for Customers
 
-        //Method for resetting search list
+        //Read key and what to do to it
 
-        //Buyer accepts type of information and gets forwarded into the Database
-        
+        ///
+        /// \brief <b>Read Key Interpretation</b> Check to see what the input of the key is. To determine if it is 
+        /// an integer or a command request
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
+        public static void ReadKeyInterpretation(string keyInfo)
+        {
+            bool isDigit = false;
+            int convertedNumb = 0;
+            //int totalRows = 0;
 
+            if(keyInfo == "quit")
+            {
+                Run = false;
+               //data.Join();
+
+               //Quit console
+               //Console.WriteLine("Press key to quit console.");
+               //Console.ReadKey();
+
+            }
+            else
+            {
+                //isDigit = IsDigitOnly(keyInfo);
+                if(isDigit)
+                {
+                    convertedNumb = Convert.ToInt32(keyInfo);
+                     
+                }
+            }
+        }
+
+        ///
+        /// \brief <b>Is Digit Only</b> - Confirm that input is only a digit 
+        /// 
+        /// <param name="str"> Take the string that was read by the console writeline</param>
+        /// 
+        /// \return Returns true/ false if the value is (not) a digit to continue with method
+        /// 
+        /// \see
+        ///
+
+        public static bool IsDigitOnly(string str)
+        {
+            foreach(char c in str)
+            {
+                if(c<'0' || c>'9')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
+
+//Method for resetting search list
+
+//Buyer accepts type of information and gets forwarded into the Database
+
