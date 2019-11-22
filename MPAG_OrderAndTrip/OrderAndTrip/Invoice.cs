@@ -12,5 +12,11 @@ namespace MPAG_OrderAndTrip
         {
 
         }
+
+        public string GenerateInvoice(Order reviewedOrder)
+        {
+            // Stubbed Out ----------------------- IMPLEMENT -----------------------//
+            return "SHOULD RETURN A STRING TO BE TRANSFORM INTO A PDF";
+        }
     }
 }
