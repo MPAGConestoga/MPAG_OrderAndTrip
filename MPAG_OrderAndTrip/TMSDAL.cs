@@ -8,10 +8,29 @@ using MySql.Data.MySqlClient;
 
 namespace MPAG_OrderAndTrip
 {
+    /** \class
+     * \brief Class used for data access with the local TMS database
+     * \details The TMSDAL contains the functionality for interaction with the locally-hosted database and the user, buyer and planner class.
+     * Within the class are three connection strings that hold the different login credentials of the three users.
+     * \see
+     *
+     */
+     
     class TMSDAL
     {
         private string buyerConnectionString = "server=127.0.0.1;user id=buyer;database=tms;password=Conestoga;SslMode=required";
-        //gg
+        private string plannerConnectionString = "server=127.0.0.1;user id=planner;database=tms;password=Conestoga;SslMode=required";
+        private string adminConnectionString = "server=127.0.0.1;user id=admin;database=tms;password=Conestoga;SslMode=required";
+
+
+        /// \brief To insert an order into the TMS local database
+        /// 
+        /// \details After the buyer selects an order from the marketplace, it is uploaded to the database. This method
+        /// is called by the Order class to upload the order. Using the buyer login credentials, this method takes the Order
+        /// object attributes and inserts the values int a mysql insert statement.
+        /// <param name="order"> - <b>Order</b> - The order to be added to the database</param>
+        /// \return none
+        /// \see Order::AddOrder()
         public void InsertOrder(Order order)
         {
             using (var myConn = new MySqlConnection(buyerConnectionString))
@@ -32,24 +51,38 @@ namespace MPAG_OrderAndTrip
                 myCommand.ExecuteNonQuery();
             }
         }
-
-        public void addAddress(string address, string city, string province, string postal)
+        
+        /// \brief To insert an address into the TMS local database
+        /// 
+        /// \details If the admin would like to add a new customer, employee, or carrier, an address may need to be 
+        /// added to the database. This method is used for insertion into the address, city, and province tables.
+        /// <param name="address"> - <b>Address</b> - The address to be added to the database</param>
+        /// \return none
+        /// \see Address
+        public void addAddress(Address address)
         {
-            using (var myConn = new MySqlConnection(buyerConnectionString))
+            using (var myConn = new MySqlConnection(adminConnectionString))
             {
                 const string sqlStatement = @"  INSERT INTO City(City)
                                                             (@city); ";
 
                 var myCommand = new MySqlCommand(sqlStatement, myConn);
 
-                myCommand.Parameters.AddWithValue("@city", city);
+                myCommand.Parameters.AddWithValue("@city", address.city);
 
                 myConn.Open();
 
                 myCommand.ExecuteNonQuery();
             }
         }
-
+        
+        /// \brief To set an order's status as current
+        /// 
+        /// \details After the planner has selected the carrier for an order, the order is confirmed. This method is used
+        /// to set the order's status as current -> the order is ready to be shipped. 
+        /// <param name="order"> - <b>Order</b> - The order to be confirmed in the database</param>
+        /// \return none
+        /// \see Order::confirmOrder()
         public void confirmOrder(Order order)
         {
             using (var myConn = new MySqlConnection(buyerConnectionString))
@@ -70,6 +103,13 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+        /// \brief To set an order's status as To-Be-Reviewed
+        /// 
+        /// \details After the order has been fulfilled, the planner will mark the order as to-be-reviewed. The buyer can
+        /// then take this order to generate an invoice for the customer. 
+        /// <param name="order"> - <b>Order</b> - The order to be set as to-be-reviewed</param>
+        /// \return none
+        /// \see Order::orderToBeInvoiced()
         public void orderStatusTripFinished(Order order)
         {
             using (var myConn = new MySqlConnection(buyerConnectionString))
@@ -92,6 +132,13 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+        /// \brief To set an order's status as Finished
+        /// 
+        /// \details After the order invoice has been generated, the buyer will set its status as finished. There is no
+        /// further action required for the order. 
+        /// <param name="order"> - <b>Order</b> - The order to be set as finished</param>
+        /// \return none
+        /// \see Order::orderFinished()
         public void orderStatusFinished(Order order)
         {
             using (var myConn = new MySqlConnection(buyerConnectionString))
@@ -112,9 +159,17 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+        /// \brief To get a customer's information
+        /// 
+        /// \details This method takes in a person object with partially filled out information:
+        /// The customer's first name, last name, and phone number. The returned information is 
+        /// set in the person object passed to the method.
+        /// <param name="person"> - <b>Person</b> - The customer to look up</param>
+        /// \return none
+        /// \see Person::getPersonInfo() 
         public void GetCustomerInformation(Person person)
         {
-            //Comparison should be done by the person name. 
+             
             const string sqlStatement = @"SELECT 
                                         p.Person_Id, p.First_Name, p.Last_Name, p.Phone, p.Email, a.Street_Address, city.City, prov.Province, a.Postal_Code
 	                                    FROM person AS p
@@ -153,12 +208,21 @@ namespace MPAG_OrderAndTrip
                     person.lastName = row["Last_Name"].ToString();
                     person.phoneNum = row["Phone"].ToString();
                     person.email = row["Email"].ToString();
-                    person.address = ((row["Street_Address"].ToString()) + (row["City"].ToString()) + (row["Province"].ToString()) + (row["Postal_Code"].ToString()));
+                    person.personAddress.streetAddress = (row["Street_Address"].ToString());
+                    person.personAddress.city = (row["City"].ToString());
+                    person.personAddress.province = (row["Province"].ToString());
+                    person.personAddress.postalCode = (row["Postal_Code"].ToString());
                 }
             }
-
         }
 
+        /// \brief To get a carrier's information by its name
+        /// 
+        /// \details This method takes in a carrier object and gets all the carrier information
+        /// by searching the databse by carrier name.
+        /// <param name="carrier"> - <b>Carrier</b> - The customer to look up</param>
+        /// \return List of Carriers
+        /// \see Carrier 
         public List<Carrier> GetCarrierByName(Carrier carrier)
         {
             const string sqlStatement = @"SELECT 
@@ -197,6 +261,13 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+        /// \brief To get a list of carriers by depot
+        /// 
+        /// \details This method takes in a string containing a city name. A list of carriers with depots
+        /// in the specified city is returned.
+        /// <param name="city"> - <b>String</b> - The city to look up</param>
+        /// \return List of Carriers
+        /// \see Carrier::getCarriersWithDepot
         public List<Carrier> GetCarriersByCity(string city)
         {
             const string sqlStatement = @"SELECT
@@ -238,6 +309,14 @@ namespace MPAG_OrderAndTrip
             
         }
 
+        /// \brief To get orders for the planner
+        /// 
+        /// \details After an order is first added to the database, the planner must then select the carrier(s)
+        /// for the order. To get the orders that have yet to be assigned a carrier, the orders are filtered by
+        /// order-status. A list of orders is returned from this method.
+        /// <param>None</param>
+        /// \return A list of orders.
+        /// \see Order
         public List<Order> GetOrdersForPlanner()
         {
             const string sqlStatement = @"SELECT
@@ -272,6 +351,13 @@ namespace MPAG_OrderAndTrip
             }
         }
 
+        /// \brief To convert a DataTable into a list of Orders
+        /// 
+        /// \details When multiple orders are returned from an sql query, this method is used to
+        /// convert the returned DataTable into a list of orders.
+        /// <param name="table"> - <b>DataTable</b> - The DataTable to be converted</param>
+        /// \return A list of orders.
+        /// \see TMSDAL:GetOrdersForPlanner
         private List<Order> DataTableToOrderList(DataTable table)
         {
             var orders = new List<Order>();
@@ -291,6 +377,13 @@ namespace MPAG_OrderAndTrip
             return orders;
         }
 
+        /// \brief To convert a DataTable into a list of Carriers
+        /// 
+        /// \details When multiple carriers are returned from an sql query, this method is used to
+        /// convert the returned DataTable into a list of carriers.
+        /// <param name="table"> - <b>DataTable</b> - The DataTable to be converted</param>
+        /// \return A list of carriers.
+        /// \see TMSDAL:GetCarriersByCity, TMSDAL:GetCarrierByName
         private List<Carrier> DataTableToCarrierList(DataTable table)
         {
             var carriers = new List<Carrier>();

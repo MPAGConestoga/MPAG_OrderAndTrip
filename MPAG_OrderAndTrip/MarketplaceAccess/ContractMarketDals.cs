@@ -9,7 +9,18 @@ namespace BuyerAccessToMarketplace
 {
     class ContractMarketDals
     {
-        //Internal Contract management
+        ///
+        /// \brief Get the internal contracts fromm the existing list
+        /// 
+        /// \details <b>Get Internal Contracts</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
+
         public List<InternalContract> GetInternalContracts()
         {
             string sqlString = GetConnection();
@@ -33,6 +44,17 @@ namespace BuyerAccessToMarketplace
             }
         }
 
+        ///
+        /// \brief Retrieving the Contract Table list
+        /// 
+        /// \details <b>Get Internal Contract</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
         public DataTable GetMarketContractsTable()
         {
             string sqlString = GetConnection();
@@ -54,6 +76,17 @@ namespace BuyerAccessToMarketplace
             }
         }
 
+        ///
+        /// \brief Retrieving the Contract Table list
+        /// 
+        /// \details <b>Get Internal Contract</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
         public List<marketContract> GetMarketContracts()
         {
             string sqlString = GetConnection();
@@ -77,6 +110,18 @@ namespace BuyerAccessToMarketplace
             }
 
         }
+
+        ///
+        /// \brief Retrieving the Contract Table list
+        /// 
+        /// \details <b>Get Internal Contract</b>
+        /// 
+        /// \param none
+        /// 
+        /// \return Returns a list of the current internal contracts being generated
+        /// 
+        /// \see
+        ///
         private List<marketContract> DataTableToMarketList(DataTable data)
         {
             var marketContracts = new List<marketContract>();
