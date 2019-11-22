@@ -28,6 +28,7 @@ namespace MPAG_OrderAndTrip
         /// <param name="city"> <b>string</b> - Buyer's city</param>
         /// <param name="province"> <b>string</b> - Buyer's province</param>
         /// <param name="postalCode"> <b>string</b> - Buyer's postal code</param> 
+
         public Buyer
             (string firstName, string lastName, string email, string phoneNum, 
             string streetAddress, string city, string province, string postalCode) : 

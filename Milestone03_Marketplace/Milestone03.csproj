@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Employees\EmployeeTest.cs" />
     <Compile Include="MarketplaceAccess\MarketplaceAccessTest.cs" />
+    <Compile Include="OrderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
