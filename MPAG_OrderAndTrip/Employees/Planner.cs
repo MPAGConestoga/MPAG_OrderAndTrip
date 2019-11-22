@@ -6,8 +6,24 @@ using System.Threading.Tasks;
 
 namespace MPAG_OrderAndTrip
 {
+    /**
+    * \brief   The Planner class represents the planner role in the TMS.
+    * \details The Planner is the one responsible for assigning a Carriers to Order and for tracking the completion of an Order 
+    */
     class Planner : Employee
     {
+        /// <summary>
+        /// Constructor for the Planner. It requires their role name ,first, last name, email, phone number and address
+        /// </summary>
+        /// <param name="role"> <b>string</b> - Name of the role </param>
+        /// <param name="firstName"> <b>string</b> - Employee's first name</param>
+        /// <param name="lastName"> <b>string</b> - Employee's last name</param>
+        /// <param name="email"> <b>string</b> - Employee's email</param>
+        /// <param name="phoneNum"> <b>string</b> - Employee's phone number</param>
+        /// <param name="streetAddress"> <b>string</b> - Part of the Address object that will be generated</param>
+        /// <param name="city"> <b>string</b> - Part of the Address object that will be generated</param>
+        /// <param name="province"> <b>string</b> - Part of the Address object that will be generated</param>
+        /// <param name="postalCode"> <b>string</b> - Part of the Address object that will be generated</param>
         public Planner
            (string firstName, string lastName, string email, string phoneNum,
            string streetAddress, string city, string province, string postalCode) :
@@ -15,7 +31,11 @@ namespace MPAG_OrderAndTrip
         { }
 
         //---------------Methods-----------------------//
-
+        /// <summary>
+        /// Gets Carriers that have a Depot in the order's origin city 
+        /// </summary>
+        /// <param name="origin"> <b>string</b> - Order's origin city </param>
+        /// <returns>Returns the List of all relevant carriers that can accomplish a particular order </returns>
         public List<Carrier> GetRelevantCarriers(string origin)
         {
             // Stubbed Out code -> Waiting for Data Acess Layer for the Relevant Cities
@@ -33,13 +53,6 @@ namespace MPAG_OrderAndTrip
 
             List<Carrier> possibleCarriers = new List<Carrier> { possCarrier1, possCarrier2, possCarrier3, possCarrier4 };
             return possibleCarriers;
-        }
-
-        public void SelectCarrier(int index, List<Carrier> possibleCarriers, Order pendingOrder)
-        {
-            Trip newTrip = new Trip(pendingOrder.origin, 10, 1000);
-            pendingOrder.assignedTrips.Add(newTrip);
-
         }
     }
 }
