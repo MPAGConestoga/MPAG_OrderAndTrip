@@ -48,9 +48,25 @@ namespace MPAG_OrderAndTrip
         /// \see Order 
         public Order CreateOrder(bool jobType, uint quantity, string origin, string destination, bool vanType)
         {
-            Order newOrder = new Order(jobType, quantity, origin, destination, vanType);
-            CreatedOrders.Add(newOrder);      // Attribute the Order to the buyer
+            Order newOrder = null;
+            try
+            {
+                newOrder = new Order(jobType, quantity, origin, destination, vanType);
+                CreatedOrders.Add(newOrder);      // Attribute the Order to the buyer
+            }
+            catch
+            {
+                newOrder = null;
+            }
+
             return newOrder;
         }
+
+        public string GenerateInvoice(Order reviewedOrder)
+        {
+            //STUBBED---------------------------------------//
+            return "TEWST";
+        }
+
     }
 }

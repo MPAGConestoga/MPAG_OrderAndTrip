@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MPAG_OrderAndTrip;
 
 namespace Milestone03_Marketplace
 {
@@ -11,31 +12,6 @@ namespace Milestone03_Marketplace
     [TestClass]
     public class OrderTest
     {
-        public OrderTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
         #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:
@@ -59,11 +35,21 @@ namespace Milestone03_Marketplace
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestOrderCreation()
         {
-            //
-            // TODO: Add test logic here
-            //
+            Buyer buyer1 = new Buyer("Gabriel", "WantsToDie", "gabsantana@gmail.com", "3434434334",
+                "AddressStreet", "Waterloo", "Ontario", "N2E2E2");
+
+            Order testOrder = buyer1.CreateOrder(true, 10, "Waterloo", "Toronto", false);
+        }
+
+        [TestMethod]
+        public void TestOrderCreationFail()
+        {
+            Buyer buyer1 = new Buyer("Gabriel", "WantsToDie", "gabsantana@gmail.com", "3434434334",
+            "AddressStreet", "Waterloo", "Ontario", "N2E2E2");
+
+            Order testOrder = buyer1.CreateOrder(true, 10, "WOOW", "Toronto", false);
         }
     }
 }
