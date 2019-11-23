@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuyerAccessToMarketplace
 {
-    /* 
-    * \class Market Contract
-    * 
+    /**  
     * \brief Purpose of this is to model the
     * database extraction 
     * 

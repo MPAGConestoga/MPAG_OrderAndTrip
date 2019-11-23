@@ -3,8 +3,8 @@ using System.Net.Mail;
 
 namespace MPAG_OrderAndTrip
 {
-    /** \class
-     * \brief Class used to represent a person: customer or employee
+    /** 
+     * \brief The Person class used to hold identifying information about an individual.
      * \details The Person class is used for holding information about a customer or employee. The Customer
      * and Employee class both inherit from this class. 
      * \see Employee, Customer

@@ -10,7 +10,7 @@ namespace MPAG_OrderAndTrip
      *          to serve orders from different places. Each Carrier will have an unique identifier, name and contact information, trip rates
      *          based on the order type and reefer charge.
      */
-    class Carrier
+    public class Carrier
     {
         /* ---------- Attributes --------------- */
         // Contact information
@@ -85,16 +85,6 @@ namespace MPAG_OrderAndTrip
             }
         }
 
-        //---------------------------------------------------------------MICHAEL_---------_-----------------------------------------------------//
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <returns></returns>
-        public List<Carrier> GetCarriersWithDepot()
-        {
-            //need to change method below. should be carrierbycity
-            var carriers = new TMSDAL().GetCarrierByName(this);
-            return carriers;
-        }
+
     }
 }

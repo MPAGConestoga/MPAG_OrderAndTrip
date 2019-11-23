@@ -130,14 +130,30 @@ namespace MPAG_OrderAndTrip
             return newOrder;
         }
 
+        /// <summary>
+        /// Used to add the calling order to the TMS database, using Data access layer
+        /// </summary>
         public void AddOrder()
         {
             new TMSDAL().InsertOrder(this);
         }
 
+        /// <summary>
+        /// Used to confirm the order in the TMS database, using Data access layer
+        /// </summary>
         public void confirmOrder()
         {
             new TMSDAL().confirmOrder(this);
+        }
+
+        /// <summary>
+        /// Used to get a list of carriers that have a depot in the origin city
+        /// </summary>
+        /// <returns></returns>
+        public List<Carrier> GetCarriersWithDepot()
+        {
+            var carriers = new TMSDAL().GetCarriersByCity(this.origin);
+            return carriers;
         }
     }
 }

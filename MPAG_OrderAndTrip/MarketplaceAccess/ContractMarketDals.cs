@@ -7,12 +7,10 @@ using System.Data;
 
 namespace BuyerAccessToMarketplace
 {
-    /* 
-    * \class Contract Market DALS
+    /**
     * 
     * \brief Setting up the DAL for contract market place -- temporary until UI integration
     * 
-    * \see
     * 
     * \author Amy Dayasundara
     */
@@ -25,7 +23,6 @@ namespace BuyerAccessToMarketplace
         /// 
         /// \return Returns a list of the current internal contracts being generated
         /// 
-        /// \see
         ///
         public List<InternalContract> GetInternalContracts()
         {
@@ -57,7 +54,6 @@ namespace BuyerAccessToMarketplace
         /// 
         /// \return Returns the datatable to the UI gridview
         /// 
-        /// \see
         ///
         public DataTable GetMarketContractsTable()
         {
@@ -88,7 +84,7 @@ namespace BuyerAccessToMarketplace
         /// 
         /// \return Returns a list of the current internal contracts being generated
         /// 
-        /// \see
+        /// \see DataTableToMarketList()
         ///
         public List<marketContract> GetMarketContracts()
         {
@@ -121,7 +117,7 @@ namespace BuyerAccessToMarketplace
         /// 
         /// \return Returns a list of the current market contracts being generated
         /// 
-        /// \see
+        /// \see GetMarketContracts()
         ///
         private List<marketContract> DataTableToMarketList(DataTable data)
         {
