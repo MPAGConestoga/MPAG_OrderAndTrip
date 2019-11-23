@@ -16,7 +16,7 @@ namespace MPAG_OrderAndTrip
      *
      */
      
-    class TMSDAL
+    public class TMSDAL
     {
         private string buyerConnectionString = "server=127.0.0.1;user id=buyer;database=tms;password=Conestoga;SslMode=required";
         private string plannerConnectionString = "server=127.0.0.1;user id=planner;database=tms;password=Conestoga;SslMode=required";

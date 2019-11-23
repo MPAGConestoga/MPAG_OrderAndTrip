@@ -14,9 +14,9 @@ namespace MPAG_OrderAndTrip
     public class Address
     {
         public string streetAddress { get; set; }
-        string city { get; set; }
-        string province { get; set; }
-        string postalCode { get; set; }
+        public string city { get; set; }
+        public string province { get; set; }
+        public string postalCode { get; set; }
         /// <summary>
         /// Constructor that sets fields of Address object
         /// </summary>
