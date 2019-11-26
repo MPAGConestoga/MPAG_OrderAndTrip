@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MPAG_OrderAndTrip;
 
 namespace Milestone03_Marketplace.Employees
 {
@@ -11,31 +12,6 @@ namespace Milestone03_Marketplace.Employees
     [TestClass]
     public class EmployeeTest
     {
-        public EmployeeTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
         #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:
@@ -58,12 +34,22 @@ namespace Milestone03_Marketplace.Employees
         //
         #endregion
 
+
         [TestMethod]
-        public void TestMethod1()
+        public void TestEmployeeRole()
         {
-            //
-            // TODO: Add test logic here
-            //
+            Employee TestEmployee = new Employee("Buyer", "Gabriel", "Gurgel", "gabsatan@gmail.com", "9230929923",
+                "Wdaasddasd", "MegatonTown", "Kitchener", "N2E3E");
+
+        }
+
+
+        [TestMethod]
+        public void TestEmployeeRoleFail()
+        {
+            Employee TestEmployee = new Employee("DoofusRole", "Gabriel", "Gurgel", "gabsatan@gmail.com", "9230929923",
+                "Wdaasddasd", "MegatonTown", "Kitchener", "N2E3E");
+                      
         }
     }
 }

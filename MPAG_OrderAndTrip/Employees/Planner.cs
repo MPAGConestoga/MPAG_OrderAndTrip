@@ -28,30 +28,20 @@ namespace MPAG_OrderAndTrip
         { }
 
         //---------------Methods-----------------------//
-        /// <summary>
-        /// Gets Carriers that have a Depot in the order's origin city 
-        /// </summary>
-        /// <param name="origin"> <b>string</b> - Order's origin city </param>
-        /// <returns>Returns the List of all relevant carriers that can accomplish a particular order </returns>
-        public List<Carrier> GetRelevantCarriers(string origin)
+        public void GetOrder(Order pendingOrder)
         {
-            // Stubbed Out code -----IMPLEMENT -----------------------//
-            // -> Waiting for Data Acess Layer for the Relevant Cities
-            Dictionary<string, Depot> tempDepotCities = new Dictionary<string, Depot>
+            if(pendingOrder.jobType == false) // FTL Trip
             {
-                {"Toronto", new Depot("Toronto", 10, 5) },
-                { "Waterloo", new Depot("Waterloo", 20, 10) },
-                { "Windsor", new Depot("Windsor", 9, 6) }
-            };
+                // GetRelevantCarriers     
+            }
 
-            Carrier possCarrier1 = new Carrier("UberCarrier", 5.00, 3.00, 100.00, tempDepotCities);
-            Carrier possCarrier2 = new Carrier("Damn Delivery", 5.00, 3.00, 100.00, tempDepotCities);
-            Carrier possCarrier3 = new Carrier("Wee Delivery", 5.00, 3.00, 100.00, tempDepotCities);
-            Carrier possCarrier4 = new Carrier("OutOfIdeas", 5.00, 3.00, 100.00, tempDepotCities);
-
-            List<Carrier> possibleCarriers = new List<Carrier> { possCarrier1, possCarrier2, possCarrier3, possCarrier4 };
-            return possibleCarriers;
         }
+
+        private List<Carrier> GetRelevantCarrier(string origin, string destination)
+        {
+            // Go to the database and grab all Carriers that have Depots in the orgin and destination
+        }
+
 
         public bool SelectCarriers(List<Carrier> SelectedCarriers, Order pendingOrder)
         {

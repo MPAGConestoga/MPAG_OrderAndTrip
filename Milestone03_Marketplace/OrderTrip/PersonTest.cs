@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MPAG_OrderAndTrip;
 
-namespace Milestone03_Marketplace
+namespace Milestone03_Marketplace.OrderTrip
 {
     /// <summary>
-    /// Summary description for OrderTest
+    /// Summary description for PersonTest
     /// </summary>
     [TestClass]
-    public class OrderTest
+    public class PersonTest
     {
         #region Additional test attributes
         //
@@ -35,21 +35,12 @@ namespace Milestone03_Marketplace
         #endregion
 
         [TestMethod]
-        public void TestOrderCreation()
+        public void ChangeEmailTest()
         {
-            Buyer buyer1 = new Buyer("Gabriel", "Gurgel", "gabsantana@gmail.com", "3434434334",
-                "AddressStreet", "Waterloo", "Ontario", "N2E2E2");
+            Person TestPerson = new Person("Gabriel", "legruG", "dontsendSpam@mailnator.com", "233222333",
+                "Cool Street", "Megaton", "Ontario", "N2El2E");
 
-            Order testOrder = buyer1.CreateOrder(true, 10, "Waterloo", "Toronto", false);
-        }
-
-        [TestMethod]
-        public void TestOrderCreationFail()
-        {
-            Buyer buyer1 = new Buyer("Gabriel", "Gurgel", "gabsantail.com", "3434434334",
-            "AddressStreet", "Waterloo", "Ontario", "N2E2E2");
-
-            Order testOrder = buyer1.CreateOrder(true, 10, "thisCityIsNotValid", "Toronto", false);
+            TestPerson.ChangeEmail("Wow@gmail.com");
         }
     }
 }

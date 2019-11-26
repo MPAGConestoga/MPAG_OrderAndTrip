@@ -55,11 +55,12 @@
     <Compile Include="OrderAndTrip\Carrier.cs" />
     <Compile Include="Employees\Employee.cs" />
     <Compile Include="Interfaces\IOrderCreation.cs" />
+    <Compile Include="OrderAndTrip\CityDepot.cs" />
     <Compile Include="OrderAndTrip\Depot.cs" />
     <Compile Include="OrderAndTrip\Invoice.cs" />
     <Compile Include="OrderAndTrip\Order.cs" />
     <Compile Include="OrderAndTrip\Trip.cs" />
-    <Compile Include="OrderAndTrip\WaitingTruck.cs" />
+    <Compile Include="OrderAndTrip\WaitingOrders.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Employees\Planner.cs" />
     <Compile Include="Program.cs" />
