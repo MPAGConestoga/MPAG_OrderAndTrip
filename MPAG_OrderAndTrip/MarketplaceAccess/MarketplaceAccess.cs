@@ -219,7 +219,7 @@ namespace BuyerAccessToMarketplace
         /// \see
         ///
 
-        public static bool IsDigitOnly(string str)
+        public bool IsDigitOnly(string str)
         {
             foreach(char c in str)
             {

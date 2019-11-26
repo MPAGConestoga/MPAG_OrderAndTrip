@@ -9,9 +9,9 @@ using WPFTest.Models;
 namespace WPFTest.ViewModels
 {
     /**
-    * \Class PendingViewModel
-    * \Brief View model for the handling of pending orders
-    * \Details The pending view model loads and handles the information that will be 
+    * \class PendingViewModel
+    * \brief View model for the handling of pending orders
+    * \details The pending view model loads and handles the information that will be 
     * displayed to the user in the pending order list in the planner role. Will handle 
     * the generation and storage of new pending orders for the pending order view.
     */

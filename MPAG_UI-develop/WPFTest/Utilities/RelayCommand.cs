@@ -8,9 +8,9 @@ using System.Windows.Input;
 namespace WPFTest.Utilities
 {
     /**
-   * \Class RelayCommand
-   * \Brief Base class for MVVM command binding
-   * \Details Interface allowing commands to be bound to buttons. Inherits from the
+   * \class RelayCommand
+   * \brief Base class for MVVM command binding
+   * \details Interface allowing commands to be bound to buttons. Inherits from the
    * ICommand interface. Instances command objects through which the view can call
    * methods.
    */
