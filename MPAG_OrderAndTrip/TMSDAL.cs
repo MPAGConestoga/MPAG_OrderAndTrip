@@ -268,10 +268,10 @@ namespace MPAG_OrderAndTrip
         /// <param name="city"> - <b>String</b> - The city to look up</param>
         /// \return List of Carriers
         /// \see Carrier::getCarriersWithDepot
-        public List<Carrier> GetCarriersByCity(string city)
+        public List<Carrier> GetCarriersByCity(string origin, string destination)
         {
             const string sqlStatement = @"SELECT
-                                            c.Carrier_Id,
+	                                        c.Carrier_Id,
 	                                        c.Carrier_Name,
                                             c.Phone,
                                             c.Email,
@@ -280,17 +280,20 @@ namespace MPAG_OrderAndTrip
                                             FROM carrier AS c
                                             INNER JOIN depot AS d
                                             INNER JOIN city
-                                            WHERE c.Carrier_Id = 
-                                                       (SELECT d.Carrier_Id
-                                                        WHERE d.Delivery_City_Id =
-                                                                (SELECT city.City_Id
-                                                                WHERE city.City = @City));";
+	                                        WHERE c.Carrier_Id = (SELECT d.Carrier_Id
+							                                        WHERE d.Delivery_City_Id = 
+								                                        (SELECT city.City_Id
+									                                        WHERE city.City = @origin
+                                                                            OR city.City = @destination))
+	                                                                        GROUP BY c.Carrier_Id
+                                                                            HAVING Count(*) > 1; ";
 
             using (var myConn = new MySqlConnection(buyerConnectionString))
             {
 
                 var myCommand = new MySqlCommand(sqlStatement, myConn);
-                myCommand.Parameters.AddWithValue("@City", city);
+                myCommand.Parameters.AddWithValue("@Origin", origin);
+                myCommand.Parameters.AddWithValue("@Destination", destination);
 
                 //For offline connection we will use  MySqlDataAdapter class.  
                 var myAdapter = new MySqlDataAdapter
@@ -396,8 +399,7 @@ namespace MPAG_OrderAndTrip
                     carrierName = row["Carrier_Name"].ToString(),
                     Phone = row["Phone"].ToString(),
                     Email = row["Email"].ToString(),
-
-                }); ;
+                });
             }
             return carriers;
         }
