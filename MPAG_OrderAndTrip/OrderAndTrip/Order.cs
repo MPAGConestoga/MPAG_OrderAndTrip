@@ -14,7 +14,7 @@ namespace MPAG_OrderAndTrip
     {
         // Constants
         // Debug: Access the database to get the Valid Cities
-        private static readonly List<string> ValidCities = new List<string> { "Toronto", "Waterloo" };  
+        private static readonly List<string> ValidCities = new List<string> { "Toronto", "Waterloo", "Windsor", "London" };  
 
         //--------- Attributes ---------//
         public int orderID { get; set; }
@@ -146,14 +146,6 @@ namespace MPAG_OrderAndTrip
             new TMSDAL().confirmOrder(this);
         }
 
-        /// <summary>
-        /// Used to get a list of carriers that have a depot in the origin city
-        /// </summary>
-        /// <returns></returns>
-        public List<Carrier> GetCarriersWithDepot()
-        {
-            var carriers = new TMSDAL().GetCarriersByCity(this.origin);
-            return carriers;
-        }
+
     }
 }

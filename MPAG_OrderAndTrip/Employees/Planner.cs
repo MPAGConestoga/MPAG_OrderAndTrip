@@ -37,10 +37,20 @@ namespace MPAG_OrderAndTrip
 
         }
 
-        private List<Carrier> GetRelevantCarrier(string origin, string destination)
+        /// <summary>
+        /// Used to get a list of carriers that have a depot in the origin city
+        /// </summary>
+        /// <returns></returns>
+        public List<Carrier> GetRelevantCarriers(string origin, string destination)
         {
-            // Go to the database and grab all Carriers that have Depots in the orgin and destination
+            var carriers = new TMSDAL().GetCarriersByCity(origin, destination);
+            return carriers;
         }
+        
+        //public List<Carrier> GetCarriersWithDepot()
+        //{
+            
+        //}
 
 
         public bool SelectCarriers(List<Carrier> SelectedCarriers, Order pendingOrder)
