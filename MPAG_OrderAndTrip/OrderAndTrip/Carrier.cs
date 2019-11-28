@@ -21,9 +21,9 @@ namespace MPAG_OrderAndTrip
             
         // Business Information
         public Dictionary<string, Depot> CityDepots = null;             // Key can be city ID???
-        private double FTLRate;
-        private double LTLRate;
-        private double ReeferCharge;
+        public double FTLRate {get;set;}
+        public double LTLRate {get;set;}
+        public double ReeferCharge {get;set;}
 
 
         /* ---------- Constructors --------------- */

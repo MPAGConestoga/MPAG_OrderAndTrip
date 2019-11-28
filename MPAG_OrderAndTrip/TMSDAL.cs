@@ -52,6 +52,32 @@ namespace MPAG_OrderAndTrip
             }
         }
         
+        /// \brief To insert a new carrier into the TMS local database
+        /// 
+        /// \details The admin is able to add a new carrier into the database
+        /// <param name="carrier"> - <b>Carrier</b> - The carrier to be added to the database</param>
+        /// \return none
+        /// \see Order::AddOrder()
+        public void InsertCarrier(Carrier carrier)
+        {
+            using (var myConn = new MySqlConnection(buyerConnectionString))
+            {
+                const string sqlStatement = @"  INSERT INTO carrier (Carrier_Name, LTL_Rate, FTL_Rate, Reefer) VALUES
+	                                                ('@CarrierName,', @LTL_Rate, @FTL_Rate, @Reefer),";
+
+                var myCommand = new MySqlCommand(sqlStatement, myConn);
+
+                myCommand.Parameters.AddWithValue("@CarrierName", carrier.carrierId);
+                myCommand.Parameters.AddWithValue("@LTL_Rate", carrier.LTLRate);
+                myCommand.Parameters.AddWithValue("@FTL_Rate", carrier.FTLRate);
+                myCommand.Parameters.AddWithValue("@Reefer", carrier.ReeferCharge);
+
+                myConn.Open();
+
+                myCommand.ExecuteNonQuery();
+            }
+        }
+
         /// \brief To insert an address into the TMS local database
         /// 
         /// \details If the admin would like to add a new customer, employee, or carrier, an address may need to be 
@@ -213,6 +239,40 @@ namespace MPAG_OrderAndTrip
                     person.personAddress.province = (row["Province"].ToString());
                     person.personAddress.postalCode = (row["Postal_Code"].ToString());
                 }
+            }
+        }
+
+        /// \brief To get all carriers in the database
+        /// 
+        /// \details This method returns a list containing the info of all carriers
+        /// in the database
+        /// 
+        /// \return List of Carriers
+        /// \see Carrier 
+        public List<Carrier> GetAllCarriers()
+        {
+            const string sqlStatement = @"SELECT 
+	                                    *
+                                        FROM carrier;;";
+
+            using (var myConn = new MySqlConnection(buyerConnectionString))
+            {
+
+                var myCommand = new MySqlCommand(sqlStatement, myConn);
+
+                //For offline connection we will use  MySqlDataAdapter class.  
+                var myAdapter = new MySqlDataAdapter
+                {
+                    SelectCommand = myCommand
+                };
+
+                var dataTable = new DataTable();
+
+                myAdapter.Fill(dataTable);
+
+                var carriers = DataTableToCarrierList(dataTable);
+
+                return carriers;
             }
         }
 
